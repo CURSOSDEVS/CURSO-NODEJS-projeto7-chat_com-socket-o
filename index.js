@@ -14,9 +14,16 @@ io.on("connection",(clienteBackEnd) => {
     clienteBackEnd.on("disconnect",() => {
         console.log("Cliente X desconectou "+ clienteBackEnd.id);
     })
+
+    /*
+    clienteBackEnd.on("msg",(data)=>{
+	    io.emit('showmsg',data);
+	    console.log(data);
+	})
+    */
     
     clienteBackEnd.on("msg",(data)=>{
-        clienteBackEnd.broadcast.emit('showmsg',data);
+        io.emit('showmsg',data);
         console.log(data);
     })
    
