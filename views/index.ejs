@@ -14,7 +14,7 @@
     </div>
     <input type="text" name="" id="msg"><br>
     <input type="text" name="" id="username" placeholder="Seu nome de usuário">
-    <button>Enviar</button>
+    <button onclick="enviar()">Enviar</button>
     
 </body>
 
@@ -29,6 +29,22 @@
     clienteFrontEnd.on("disconnect", ()=>{
         console.log("Desconectado")
     })
+
+    <!--FUNÇÃO PARA CAPTURAR A MENSAGEM NOS INPUTS E ENVIAR A 
+        MENSAGEM ATRAVES DO SOCKET-->
+        function enviar(){
+            var msgField = document.getElementById("msg");
+            var usernameField = document.getElementById("username");
+
+            var msg = msgField.value;
+            var username = usernameField.value;
+
+            clienteFrontEnd.emit("msg",{
+                msg: msg,
+                username: username
+            })
+
+        }
 
 </script>
 </html>
