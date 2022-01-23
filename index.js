@@ -9,10 +9,16 @@ var io = require("socket.io")(http);
 //evento de conexão do socket.io
 io.on("connection",(clienteBackEnd) => {
 
+    console.log('Cliente '+clienteBackEnd.id+' conectado!');
+
     clienteBackEnd.on("disconnect",() => {
         console.log("Cliente X desconectou "+ clienteBackEnd.id);
     })
     
+    clienteBackEnd.on("msg",(data)=>{
+        clienteBackEnd.emit('showmsg',data);
+        console.log(data);
+    })
    
     
 })
