@@ -16,7 +16,7 @@ io.on("connection",(clienteBackEnd) => {
     })
     
     clienteBackEnd.on("msg",(data)=>{
-        clienteBackEnd.emit('showmsg',data);
+        clienteBackEnd.broadcast.emit('showmsg',data);
         console.log(data);
     })
    
