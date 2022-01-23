@@ -12,6 +12,7 @@
     <div id="chat">
 
     </div>
+    <hr>
     <input type="text" name="" id="msg"><br>
     <input type="text" name="" id="username" placeholder="Seu nome de usuário">
     <button onclick="enviar()">Enviar</button>
@@ -30,6 +31,17 @@
         console.log("Desconectado")
     })
 
+    clienteFrontEnd.on('showmsg',(data) => {
+        console.log(data);
+        var chat = document.getElementById("chat");
+        //criando um novo parágrafo
+        var p = document.createElement('p');
+        //adicionando os dados passados do backend para o parágrafo
+        p.innerHTML = 'Id: '+data.id+' Nome: '+ data.username +': '+data.msg;
+        //inserindo o parágrafo na página dentro da div
+        chat.append(p);
+    })
+
     // FUNÇÃO PARA CAPTURAR A MENSAGEM NOS INPUTS E ENVIAR A MENSAGEM ATRAVES DO SOCKET
         function enviar(){
             var msgField = document.getElementById("msg");
@@ -39,6 +51,7 @@
             var username = usernameField.value;
 
             clienteFrontEnd.emit("msg",{
+                id: clienteFrontEnd.id,
                 msg: msg,
                 username: username
             })
